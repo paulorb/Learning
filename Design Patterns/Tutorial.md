@@ -18,7 +18,7 @@ Look at the UML below, it shows what we have just described using a pattern call
 
 
 
-![alt text](https://plantuml.atug.com/svg/TOxB2i8m44NtWVp3B7sGVe28K1MX2rUAMqdZr0QJA7aiIjj_jm7hmfhTp9npXqkAt3dKfMfEtdAFzmRMNPR18IZLvC4_zN2yZGwieD0lXHgDTvGaiaTk0bU9p8vROApRm0LhAHH6R6gqCiAp3UAHnjlWqd1QPi7OQ58YZKTRSO4m5TkU4bwwOHN--xkb183ziQ_kCqLX2NkifC5VQpQdf2Tl)
+![alt text](https://plantuml.atug.com/svg/TOxB2i8m44NtWVp3B7tGVe2ugOhGXIl5hQJfr0QJLF8GIks_snQhOCrkkEVScI5fOYsgJDP7PvZ3QmthPnp3tajP9zvLgWlpqO4LfEekKQ5sbf90zy2qPpBGsJBJML44Pom5bzXZNQ8HFJmPpszXlF4s3AVFBBuc9K8xD0NZ25EneGIWOPdj0kvQU5GYXz6QpIbfAHdfv_PGYlvikzZtr0jBs64XDFvQmrRo0W00)
 
 <!---
 IAssemblyStrategy <|.. FullyAutomatedAssembly : Implements
@@ -27,14 +27,22 @@ Car <|-- Vehicle : Inherits
 Truck <|-- Vehicle : Inherits
 Bus <|-- Vehicle : Inherits
 IAssemblyStrategy *-- Vehicle
-interface IAssemblyStrategy {}
+interface IAssemblyStrategy {
+  {abstract} void Assembly()
+}
 abstract Vehicle {
   - IAssemblyStrategy _strategy
   + DefineAssemblyStrategy()
 }
 --->
 
+Let's instanciate a car and see how we can dynamically define a strategy
 
+```
+Car c;
+c.DefineAssemblyStrategy((std::make_shared <ManualAssembly>());
+c.Assembly()
+```
 
 
 ## Observer
