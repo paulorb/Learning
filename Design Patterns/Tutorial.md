@@ -125,7 +125,7 @@ c.DefineAssemblyStrategy(std::make_shared <ManualAssembly>()); //Change
 c.Assembly();
 ```
 
-
+Complete code available at: [Decorator.cpp](Decorator.cpp)
 
 
 ## Observer
