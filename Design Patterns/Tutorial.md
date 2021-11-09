@@ -37,13 +37,95 @@ abstract Vehicle {
 }
 --->
 
-Let's instanciate a car and see how we can dynamically define a strategy
+Time to code this solution, first we create an interface (IAssemblyStrategy) and two classes that will implement this interface FullyAutomatedAssembly and ManualAssembly with a concrete implementation of the individual assembly method
 
 ```
-Car c;
-c.DefineAssemblyStrategy((std::make_shared <ManualAssembly>());
-c.Assembly()
+class IAssemblyStrategy {
+public:
+    virtual void Assembly() = 0;
+    virtual ~IAssemblyStrategy() {}
+    IAssemblyStrategy() {}
+};
+
+class FullyAutomatedAssembly : public IAssemblyStrategy {
+public:
+    virtual void Assembly() {
+        std::cout << "FullyAutomatedAssembly";
+    }
+    ~FullyAutomatedAssembly() {}
+    FullyAutomatedAssembly() {}
+};
+
+
+class ManualAssembly : public IAssemblyStrategy {
+public:
+    void Assembly() {
+        std::cout << "ManualAssembly";
+    }
+    ~ManualAssembly() {}
+    ManualAssembly() {}
+};
+
 ```
+
+Now we create the Vehicle and each different type of vehicle that will be inheriting from this base class
+
+```
+class Vehicle {
+public:
+    std::shared_ptr<IAssemblyStrategy> assemblyStrategy;
+    void DefineAssemblyStrategy(std::shared_ptr<IAssemblyStrategy> strategy) {
+        assemblyStrategy = strategy;
+    }
+
+    void Assembly() {
+        assemblyStrategy->Assembly();
+    }
+    Vehicle() {
+        assemblyStrategy = nullptr;
+    }
+    virtual ~Vehicle() {
+    };
+};
+
+class Car : public Vehicle {
+public:
+    Car(std::shared_ptr<IAssemblyStrategy> strategy) {
+        this->DefineAssemblyStrategy(strategy);
+    }
+};
+
+class Truck : public Vehicle {
+public:
+    Truck(std::shared_ptr<IAssemblyStrategy> strategy) {
+        this->DefineAssemblyStrategy(strategy);
+    }
+};
+
+class Bus : public Vehicle {
+public:
+    Bus(std::shared_ptr<IAssemblyStrategy> strategy) {
+        this->DefineAssemblyStrategy(strategy);
+    }
+};
+```
+
+Let's instanciate a car defining an assembly method during runtime
+
+```
+Car c(std::make_shared<FullyAutomatedAssembly>());
+c.Assembly();
+```
+
+We can also change it after instantiation since we made our DefineAssemblyStrategy public
+
+```
+Car c(std::make_shared<FullyAutomatedAssembly>());
+c.DefineAssemblyStrategy(std::make_shared <ManualAssembly>()); //Change
+c.Assembly();
+```
+
+
 
 
 ## Observer
