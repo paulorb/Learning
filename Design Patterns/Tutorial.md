@@ -135,6 +135,34 @@ Defines a one-to-many  dependency between objects so that when one object change
 Attach additional responsabilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending funcitonality
 
 ## Simple Factory (not a real design pattern/more of a programming idiom)
+It is not considered a real Design Pattern, it is more of a programming idiom, but it is commonly used.
+
+Suppose  we have a pizza store that creates different type of pizzas, I want to be able to create different types of pizzas, we can achieve that by creating an abstract class Pizza and concrete classes related to each type of pizza like PizzaMarguerita, PizzaNapolitana, PizzaCalabresa inheriting from the base class and overriding the Prepare method, defining specific behavior required to create specific types of pizzas.
+
+<!---
+@startuml
+abstract Pizza {
+ + Prepare()
+}
+
+
+class SimplePizzaFactory {
++ createPizza()
+}
+
+Pizza  <|.. PizzaMarguerita : Implements
+Pizza  <|.. PizzaNapolitana : Implements
+Pizza  <|.. PizzaCalabresa : Implements
+
+SimplePizzaStore --* SimplePizzaFactory
+
+Pizza   -- SimplePizzaFactory
+@enduml
+--->
+
+![alt text](http://www.plantuml.com/plantuml/png/XSv12i9038NXVKwHfLhQ0uYBWY2uK0ezGLg356RQacGMLhsxemCYMd2RV3p-Ket4WdT0ZPfGQrXrqqHu1Som4Xv9UB64Em2qZbInxlpe-8LsaGzoYJR3LfWidHDFCxYv5KMQF92S0qjdX6lSFqSyzwQ_y4ZZu2Bh_y4jEMg4zSl1Hs9jWp3c-Mgc-zqO_tFlaljJyEu1)
 
 
 ## Factory
+
+## Abstract Factory
