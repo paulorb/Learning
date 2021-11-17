@@ -126,7 +126,7 @@ c.DefineAssemblyStrategy(std::make_shared <ManualAssembly>()); //Change
 c.Assembly();
 ```
 
-Complete code available at: [Decorator.cpp](Decorator.cpp)
+Complete code available at: [Strategy.cpp](Strategy.cpp)
 
 
 ## Observer
@@ -218,6 +218,8 @@ std::shared_ptr<Milk> milk_decorator_second = std::make_shared<Milk>(milk_decora
 
 std::cout << milk_decorator_second->cost() << std::endl;
 ```
+
+Complete code available at: [Decorator.cpp](Decorator.cpp)
   
 ## Simple Factory (not a real design pattern/more of a programming idiom)
 It is not considered a real Design Pattern, it is more of a programming idiom, but it is commonly used.
