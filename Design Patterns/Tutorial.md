@@ -6,6 +6,7 @@
 * Program to an interface, not implementation
 * Strive for loosely coupled designs between between objects that interact
 * Classes should be open for extension but closed for modification
+* Depend on abstractions. Do not depend on concrete classes
 
 ## Strategy
 **Formal Definition: Defined a family of algorithms, encapsulate each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.**
