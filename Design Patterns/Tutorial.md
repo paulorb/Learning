@@ -163,6 +163,63 @@ Pizza   -- SimplePizzaFactory
 
 ![alt text](http://www.plantuml.com/plantuml/png/XSv12i9038NXVKwHfLhQ0uYBWY2uK0ezGLg356RQacGMLhsxemCYMd2RV3p-Ket4WdT0ZPfGQrXrqqHu1Som4Xv9UB64Em2qZbInxlpe-8LsaGzoYJR3LfWidHDFCxYv5KMQF92S0qjdX6lSFqSyzwQ_y4ZZu2Bh_y4jEMg4zSl1Hs9jWp3c-Mgc-zqO_tFlaljJyEu1)
 
+Time to code our simple factory, first create a base class Pizza, then create each specific concrete implementation of pizza types (PizzaMarguerita, PizzaCalabresa and PizzaNapolitana) all inheriting from base class (Pizza) overriding Prepare() default implementation, since each pizza must be prepared in a different way.
+
+```
+class Pizza {
+public:
+    virtual void Prepare() { std::cout << "Standard Prepare" << std::endl; };
+    virtual void Bake() { std::cout << "Standard Bake" << std::endl; };
+    virtual void Cut() { std::cout << "Standard Cut" << std::endl; };
+    virtual void Box() { std::cout << "Standard Box" << std::endl; };
+    virtual ~Pizza() {};
+};
+
+class PizzaMarguerita : public Pizza{
+public:
+    virtual void Prepare() override { std::cout << "add cheese" << std::endl; };
+    virtual ~PizzaMarguerita() {};
+};
+
+class PizzaCalabresa : public Pizza {
+public:
+    virtual void Prepare() override { std::cout << "add calabresa" << std::endl; };
+    virtual ~PizzaCalabresa() {};
+};
+
+class PizzaNapolitana : public Pizza {
+public:
+    virtual void Prepare() override { std::cout << "add x" << std::endl; };
+    virtual ~PizzaNapolitana() {};
+};
+```
+
+Then implement the factory class (SimplePizzaFactory) that will have a createPizza method that will build a specific pizza type based on the specified type.
+
+```
+class SimplePizzaFactory {
+public:
+    enum Styles { eMarguerita, eCalabresa, eNapolitana };
+    std::shared_ptr<Pizza> createPizza(Styles type)
+    {
+        switch (type)
+        {
+        case SimplePizzaStoreFactory::Styles::eCalabresa:
+            return std::make_shared<PizzaCalabresa>();
+            break;
+        case SimplePizzaStoreFactory::Styles::eMarguerita:
+            return std::make_shared<PizzaMarguerita>();
+            break;
+        case SimplePizzaStoreFactory::Styles::eNapolitana:
+            return std::make_shared<PizzaNapolitana>();
+            break;
+        default:
+            break;
+        }
+    }
+};
+```
+Complete code available at: [Simple Factory.cpp](Simple Factory.cpp)
 
 ## Factory
 
